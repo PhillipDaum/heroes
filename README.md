@@ -5,6 +5,7 @@
 ------ it would be a great memecoin, the nfts are the quests
 ------ run a hackathon and those are some of the ideas because its extensible! its open source 
 ------ CSS could be skins we could do skins
+--- or you could just print it and play IRL, LaTeX...? 
 
 
 ## User Interface
