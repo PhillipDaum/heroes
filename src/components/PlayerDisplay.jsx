@@ -1,16 +1,12 @@
 import React from 'react';
 
-function PlayerDisplay({ currentPlayer }) {
-  if (!currentPlayer) {
-    return <p>No player selected.</p>;
-  }
-
+function PlayerDisplay({ player }) {
   return (
     <div>
-      <h2>{currentPlayer.name}'s Turn</h2>
-      <p>Health: {currentPlayer.health}</p>
-      <p>Actions: Movement - {currentPlayer.movement}, Attack - {currentPlayer.attack}</p>
-      {/* Add more player details as needed */}
+      <h2>{player.name}'s Turn</h2>
+      <p>Health: {player.health}</p>
+      <p>Strength: {player.strength}</p>
+      <p>Special Ability: {player.ability}</p>
     </div>
   );
 }

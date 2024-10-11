@@ -1,5 +1,5 @@
 // rooms.jsx
-import { generateRandomChestLocation } from './utils'; // helper function for random chest location
+import { generateRandomChestLocation } from '../utils/utils'; // helper function for random chest location
 
 export const rooms = [
     {

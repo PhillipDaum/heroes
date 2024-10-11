@@ -1,107 +1,76 @@
 import React, { useState } from 'react';
-// import MonsterCard from './components/MonsterCards';
-import { monsters } from './data/monsters';
-import { heroes } from './data/heroes';
-// import { generateRandomChestLocation } from '../utils/utils';
+import Gameboard from './components/Gameboard';
+import PlayerDisplay from './components/PlayerDisplay';
+import Buttons from './components/Buttons';
+import { heroes } from './data/heroes'; // import heroes data
+import { rooms } from './data/rooms'; // import rooms data
+import { monsters } from './data/monsters'; // import monsters data
+import { generateRandomChestLocation } from './utils/utils.jsx'; // helper function for random chest location
 
 function App() {
-  // global variables
   const [gameState, setGameState] = useState({
-    players: [], // players and monsters in the order of initiative
+    playerQuantity: 0, // this is making things easier for me 
+    players: [], // players in order of initiative
     rooms: [], // rooms in play
     monsters: [], // monsters in play
-    quest: "The Great Goblin Hunt", // Current quest name or details
-    currentPlayerIndex: 0, // Tracks whose turn it is
+    quest: "The Great Goblin Hunt",
+    currentPlayerIndex: 0, // track whose turn it is
   });
-  const [turn, setTurn] = useState({
-    movement: true,
-    action: true,
-    bonusAction: true,
-  });
-  const [selectedHero, setSelectedHero] = useState(null);
 
-  // Function to log game state
-  const logGameState = () => {
-    console.log(gameState);
-  };
+  // const [turn, setTurn] = useState({
+  //   movement: true,
+  //   action: true,
+  //   bonusAction: true,
+  // });
 
-  // Function to handle player hero selection
-  const selectHero = (hero) => {
-    setSelectedHero(hero);
-    setGameState((prevState) => ({
-      ...prevState,
-      players: [...prevState.players, hero],
-    }));
-  };
+  // const selectHero = (hero) => {
+  //   setGameState((prevState) => ({
+  //     ...prevState,
+  //     players: [...prevState.players, hero],
+  //   }));
+  // };
 
-  // Function to end turn and switch to the next player
-  const endTurn = () => {
-    setTurn({
-      movement: true,
-      action: true,
-      bonusAction: true,
-    });
+  // const endTurn = () => {
+  //   setTurn({
+  //     movement: true,
+  //     action: true,
+  //     bonusAction: true,
+  //   });
+  //   setGameState((prevState) => ({
+  //     ...prevState,
+  //     currentPlayerIndex: (prevState.currentPlayerIndex + 1) % prevState.players.length,
+  //   }));
+  // };
 
-    setGameState((prevState) => ({
-      ...prevState,
-      currentPlayerIndex: (prevState.currentPlayerIndex + 1) % prevState.players.length,
-    }));
+    /// some kind of game function that runs in order
+    //// first how many people are playing? - it can be an integer between one and four
+    //// players 
+    //// new state - that many people choose a hero, once someone chooses one, its gone, player one is lucky 
 
-    logGameState(); // Log the game state after each turn
-  };
-
-  // Function to perform actions during a turn
-  const performAction = (actionType) => {
-    if (turn[actionType]) {
-      console.log(`${gameState.players[gameState.currentPlayerIndex].name} performed ${actionType}`);
-      setTurn((prevTurn) => ({
-        ...prevTurn,
-        [actionType]: false,
-      }));
-    } else {
-      console.log(`${actionType} already used this turn!`);
-    }
-  };
-
-  // Display heroes to choose from
-  const heroSelectionDisplay = heroes.map((hero) => (
-    <button key={hero.name} onClick={() => selectHero(hero)}>
-      {hero.name}
-    </button>
-  ));
 
   return (
     <div>
-      <h1>{gameState.quest}</h1>
-
-      {/* Hero selection phase */}
-      {gameState.players.length < 2 && (
+      {/* I want this to be in another component */}
+      {console.log(gameState)}
+      {/* make this a quest info functional component */}
+      <h1>Quest: {gameState.quest}</h1>
+      {/* change to if it is less than 0 */}
+      {gameState.players.length < 2 ? (
+        // make this a functional component
         <div>
-          <h2>Select Your Hero</h2>
-          {heroSelectionDisplay}
+          <h2>Select a Hero</h2>
+          <h3>player { 2 }</h3>
+          {heroes.map((hero) => (
+            <button key={hero.name} onClick={() => selectHero(hero)}>
+              {hero.name}
+            </button>
+          ))}
         </div>
-      )}
-
-      {/* Game Play Phase */}
-      {gameState.players.length === 2 && (
+      ) : (
         <div>
-          <h2>It's {gameState.players[gameState.currentPlayerIndex]?.name}'s Turn</h2>
-          <p>Movement: {turn.movement ? "Available" : "Used"}</p>
-          <p>Action: {turn.action ? "Available" : "Used"}</p>
-          <p>Bonus Action: {turn.bonusAction ? "Available" : "Used"}</p>
-
-          {/* Buttons to perform actions */}
-          <div>
-            <button onClick={() => performAction('movement')}>Move</button>
-            <button onClick={() => performAction('action')}>Attack</button>
-            <button onClick={() => performAction('bonusAction')}>Use Bonus Action</button>
-          </div>
-
-          {/* End turn button */}
-          <button onClick={endTurn}>End Turn</button>
-
-          {/* Button to log game state */}
-          <button onClick={logGameState}>Log Game State</button>
+          <Gameboard rooms={gameState.rooms} />
+          <PlayerDisplay player={gameState.players[gameState.currentPlayerIndex]} />
+          <Buttons turn={turn} setTurn={setTurn} endTurn={endTurn} />
         </div>
       )}
     </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Button({ onClick, label }) {
+function Button({ label, onClick, disabled }) {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} disabled={disabled}>
       {label}
     </button>
   );
