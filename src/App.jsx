@@ -9,13 +9,17 @@ import { generateRandomChestLocation } from './utils/utils.jsx'; // helper funct
 
 function App() {
   const [gameState, setGameState] = useState({
-    playerQuantity: 0, // this is making things easier for me 
+    playerQuantity: 0, // this is making things easier for me
+    playerInTurn: null,
     players: [], // players in order of initiative
     rooms: [], // rooms in play
     monsters: [], // monsters in play
     quest: "The Great Goblin Hunt",
     currentPlayerIndex: 0, // track whose turn it is
   });
+
+  // between 2 and 6 players
+  // no need to program in the monster logic. The other player will drive the 
 
   // const [turn, setTurn] = useState({
   //   movement: true,
@@ -32,9 +36,10 @@ function App() {
 
   // const endTurn = () => {
   //   setTurn({
-  //     movement: true,
-  //     action: true,
-  //     bonusAction: true,
+  //     movement: true
+          // movement will happen one space at a time, if it is takes place on the edge of a tile and more tiles exist, then ask if they want to look in
+  //     action: true, // hit something, open chests, or move again.
+  //     bonusAction: true, // take 
   //   });
   //   setGameState((prevState) => ({
   //     ...prevState,
