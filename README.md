@@ -1,5 +1,14 @@
 # Heroes
 
+### Ask what parts to have in a good readme what to have in repo
+
+
+
+
+
+
+
+
 --- it would be cool for it to be something you can spin up with you friends and have a simultaneous chat
 ----- chat could be very minimal or full on video chat, or  you can play in person
 ------ it would be a great memecoin, the nfts are the quests
@@ -80,3 +89,59 @@ playerInfo {
 	1 action - actions can be a movement
 	1 bonus-action
 
+
+
+
+#### More psedudocode 
+
+  // accepts between 2 and 6 players
+  // asks for name for each player - to keep track
+  // each player rolls for inititive
+  // it reorders the array in order of initiative 
+
+  // first turn 
+  // players select a character
+  // have 3 gold
+  // buy any items from a list of items
+  // place themselves in 
+
+  // subsequent turns 
+  //   movement: true,
+  //   action: true,
+  //   bonusAction: true,
+
+
+  /// state 1 - 
+  // between 2 and 6 players
+  // no need to program in the monster logic. The other player will drive the 
+
+  // const [turn, setTurn] = useState({
+  //   movement: true,
+  //   action: true,
+  //   bonusAction: true,
+  // });
+
+  // const selectHero = (hero) => {
+  //   setGameState((prevState) => ({
+  //     ...prevState,
+  //     players: [...prevState.players, hero],
+  //   }));
+  // };
+
+  // const endTurn = () => {
+  //   setTurn({
+  //     movement: true
+  // movement will happen one space at a time, if it is takes place on the edge of a tile and more tiles exist, then ask if they want to look in
+  //     action: true, // hit something, open chests, or move again.
+  //     bonusAction: true, // take 
+  //   });
+  //   setGameState((prevState) => ({
+  //     ...prevState,
+  //     currentPlayerIndex: (prevState.currentPlayerIndex + 1) % prevState.players.length,
+  //   }));
+  // };
+
+  /// some kind of game function that runs in order
+  //// first how many people are playing? - it can be an integer between one and four
+  //// players 
+  //// new state - that many people choose a hero, once someone chooses one, its gone, player one is lucky 
